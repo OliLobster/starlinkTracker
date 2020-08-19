@@ -1,3 +1,4 @@
+@import '~antd/dist/antd.css';
 @import "./styles/Header.css";
 @import "./App.css";
 @import "./styles/Footer.css";
