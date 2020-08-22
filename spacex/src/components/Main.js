@@ -11,12 +11,31 @@ class Main extends Component {
         }
       }
   
+      showNearbySatellite = (setting) => {
+        this.fetchSatellite(setting);
+      }
+  
+      fetchSatellite = (setting) => {
+        const {observerLat, observerLong, observerAlt, radius} = setting;
+        const url = `${NEARBY_SATELLITE}/${observerLat}/${observerLong}/${observerAlt}/${radius}/${STARLINK_CATEGORY}/&apiKey=${SAT_API_KEY}`;
+  
+        Axios.get(url)
+            .then(response => {
+                this.setState({
+                    satInfo: response.data,
+                })
+            })
+            .catch(error => {
+                console.log('err in fetch satellite -> ', error);
+            })
+      }  
+  
     render() {
         return (
             <div className='main'>
                 <div className="left-side">
-                    <SatSetting />
-                    <SatelliteList />
+                    <SatSetting onShow={this.showNearbySatellite} />
+                    <SatelliteList satInfo={this.state.satInfo} />
                 </div>
                 <div className="right-side">
                     right
