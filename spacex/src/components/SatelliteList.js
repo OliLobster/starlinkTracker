@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Button } from 'antd';
-import { List, Avatar, Button, Checkbox } from 'antd';
+import { List, Avatar, Button, Checkbox, Spin } from 'antd';
 import Satellite from "../assets/images/Satellite.svg";
 class SatelliteList extends Component {
     render() {
@@ -11,6 +11,9 @@ class SatelliteList extends Component {
                 <Button className="sat-list-btn"
                         size="large">Track on the map</Button>
                 <hr/>
+                {
+                    this.props.loading ? 
+                    <Spin tip="Loading Satellites..." /> :
                  <List
                     className="sat-list"
                     itemLayout="horizontal"
@@ -29,7 +32,7 @@ class SatelliteList extends Component {
                         </List.Item>
                     )}
                 />
-
+            }
             </div>
         );
     }
