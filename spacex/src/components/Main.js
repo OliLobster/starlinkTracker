@@ -18,15 +18,23 @@ class Main extends Component {
       fetchSatellite = (setting) => {
         const {observerLat, observerLong, observerAlt, radius} = setting;
         const url = `${NEARBY_SATELLITE}/${observerLat}/${observerLong}/${observerAlt}/${radius}/${STARLINK_CATEGORY}/&apiKey=${SAT_API_KEY}`;
-  
+        
+        this.setState({
+            loadingSatellites: true,
+          })
+
         Axios.get(url)
             .then(response => {
                 this.setState({
                     satInfo: response.data,
+                    loadingSatellites: false,
                 })
             })
             .catch(error => {
                 console.log('err in fetch satellite -> ', error);
+                this.setState({
+                    loadingSatellites: false,
+                })    
             })
       }  
   
@@ -36,6 +44,7 @@ class Main extends Component {
                 <div className="left-side">
                     <SatSetting onShow={this.showNearbySatellite} />
                     <SatelliteList satInfo={this.state.satInfo} />
+                    loading={this.state.loadingSatellites} 
                 </div>
                 <div className="right-side">
                     right
