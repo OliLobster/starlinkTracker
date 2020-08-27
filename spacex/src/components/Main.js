@@ -72,6 +72,9 @@ class Main extends Component {
                     <SatSetting onShow={this.showNearbySatellite} />
                     <SatelliteList satInfo={this.state.satInfo} />
                     loading={this.state.loadingSatellites} 
+                    onSelectionChange={this.addOrRemove}
+                    disableTrack={this.state.selected.length === 0}
+                    trackOnclick={this.trackOnClick}
                 </div>
                 <div className="right-side">
                     right

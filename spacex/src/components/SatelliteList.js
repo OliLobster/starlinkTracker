@@ -13,6 +13,8 @@ class SatelliteList extends Component {
             <div className="sat-list-box">
                 <Button className="sat-list-btn"
                         size="large">Track on the map</Button>
+                        disabled={this.props.disableTrack}
+                        onClick={() => this.props.trackOnclick()}
                 <hr/>
                 {
                     this.props.loading ? 
